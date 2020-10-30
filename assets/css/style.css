@@ -1,0 +1,43 @@
+main {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+header,
+footer,
+nav {
+    background-color: gainsboro;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#page-container {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 50px;
+}
+#header {
+    padding: 10px;
+}
+#main {
+    padding: 10px;
+    padding-bottom: 75px; /* Height of the footer */
+}
+#footer {
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+    width: 100%;
+    height: 75px; /* Height of the footer */
+}
+
+#form {
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+}
