@@ -155,9 +155,10 @@
 
   function createLocationButton(location)
   {
+    resetActiveButton();
     let newBtn = $("<button>");
     newBtn.attr("type", "button");
-    newBtn.addClass("list-group-item list-group-item-action active");
+    newBtn.addClass("list-group-item list-group-item-action location-button active");
     newBtn.text(location);
     newBtn.attr("data-location", location);
     $("#location-buttons").prepend(newBtn);
@@ -212,7 +213,7 @@
     return direction;
   }
 
-  function pullWeatherData(location)
+  function pullWeatherData(location, newBtn)
   {
     let params = 
     {
@@ -234,8 +235,11 @@
     {
         console.log(response);
         let forecast = response;
-        resetActiveButton();
-        createLocationButton(forecast.name);
+
+        if (newBtn)
+        {
+          createLocationButton(forecast.name);
+        }
 
         $("#location-name").text(forecast.name);
         $("#current-temp").text("Current: " + kelvinToFahrenheit(forecast.main.temp) + '\u00B0' + "F");
@@ -248,6 +252,14 @@
     });
   }
 
+  $(document).on("click", ".location-button", function()
+  {
+    let location = $(this).attr("data-location");
+    resetActiveButton();
+    $(this).addClass("active");
+    pullWeatherData(location, false);
+  })
+
   $("#location-search").on("submit", function(event)
   {
     event.preventDefault();
@@ -255,7 +267,7 @@
     let location = $("#location-input").val();
     $("#location-input").val("");
 
-    pullWeatherData(location);
+    pullWeatherData(location, true);
   })
 
 </script>
