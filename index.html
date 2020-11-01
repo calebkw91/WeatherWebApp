@@ -42,6 +42,7 @@
                 <div class="row">
                   <div class="col-4">
                     <h5 class="card-title" id="current-temp">Current Temp</h5>
+                    <img src="" id="weather-condition" alt="weather condition">
                   </div>
                   <div class="col-4">
                     <ul>
@@ -199,7 +200,7 @@
     {
      direction = "W"; 
     }
-    
+
     return direction;
   }
 
@@ -239,6 +240,7 @@
         $("#temp-low").text("Low: " + kelvinToFahrenheit(forecast.main.temp_max) + '\u00B0' + "F");
         $("#current-humidity").text("Humidity: " + forecast.main.humidity + "%");
         $("#current-wind").text("Wind: " + forecast.wind.speed + windDirection(forecast.wind.deg));
+        $("#weather-condition").attr("src", "http://openweathermap.org/img/wn/" + forecast.weather[0].icon + "@2x.png")
     });
   })
 
