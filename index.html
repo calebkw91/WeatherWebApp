@@ -72,8 +72,8 @@
               </div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item" id="temp-low-day-1">Temp</li>
-                <li class="list-group-item">Wind</li>
-                <li class="list-group-item" id="humidity-day-1">Humidity</li>
+                <li class="list-group-item" id="wind-day0">Wind</li>
+                <li class="list-group-item" id="humidity-day0">Humidity</li>
               </ul>
             </div>
             <div class="card" style="width: 20%">
@@ -84,8 +84,8 @@
               </div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item" id="temp-day-2">Temp</li>
-                <li class="list-group-item">Wind</li>
-                <li class="list-group-item" id="humidity-day-2">Humidity</li>
+                <li class="list-group-item" id="wind-day1">Wind</li>
+                <li class="list-group-item" id="humidity-day1">Humidity</li>
               </ul>
             </div>
             <div class="card" style="width: 20%">
@@ -96,8 +96,8 @@
               </div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">Temp</li>
-                <li class="list-group-item">Wind</li>
-                <li class="list-group-item">Humidity</li>
+                <li class="list-group-item" id="wind-day2">Wind</li>
+                <li class="list-group-item" id="humidity-day2">Humidity</li>
               </ul>
             </div>
             <div class="card" style="width: 20%">
@@ -108,8 +108,8 @@
               </div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">Temp</li>
-                <li class="list-group-item">Wind</li>
-                <li class="list-group-item">Humidity</li>
+                <li class="list-group-item" id="wind-day3">Wind</li>
+                <li class="list-group-item" id="humidity-day3">Humidity</li>
               </ul>
             </div>
             <div class="card" style="width: 20%">
@@ -120,8 +120,8 @@
               </div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">Temp</li>
-                <li class="list-group-item">Wind</li>
-                <li class="list-group-item">Humidity</li>
+                <li class="list-group-item" id="wind-day4">Wind</li>
+                <li class="list-group-item" id="humidity-day4">Humidity</li>
               </ul>
             </div>
           </div>
@@ -276,8 +276,9 @@
             {
               $("#conditions" + i).attr("src", "http://openweathermap.org/img/wn/" + forecast.daily[i].weather[0].icon + "@2x.png")
               $("#temp-day" + i).text(kelvinToFahrenheit(forecast.daily[i].temp.max) + "/" + kelvinToFahrenheit(forecast.daily[i].temp.min) + '\u00B0' + "F");
+              $("#humidity-day" + i).text("Humidity: " + forecast.daily[i].humidity + "%");
+              $("#wind-day" + i).text("Wind: " + forecast.daily[i].wind_speed + windDirection(forecast.daily[i].wind_deg));
             }
-
         });
     });
   }
