@@ -233,7 +233,6 @@
     })
     .then(function(response) 
     {
-        console.log(response);
         let forecast = response;
 
         if (newBtn)
@@ -249,6 +248,32 @@
         $("#current-humidity").text("Humidity: " + forecast.main.humidity + "%");
         $("#current-wind").text("Wind: " + forecast.wind.speed + windDirection(forecast.wind.deg));
         $("#weather-condition").attr("src", "http://openweathermap.org/img/wn/" + forecast.weather[0].icon + "@2x.png")
+
+        let paramsWeek = 
+        {
+          lat: forecast.coord.lat,
+          lon: forecast.coord.lon,
+          exclude: "current,minutely,hourly",
+          appid: "87cd2f3bae194c48a4c4081e9ab09c49"
+        }
+
+        paramsWeek = $.param(paramsWeek);
+
+        let queryURLWeek = "https://api.openweathermap.org/data/2.5/onecall?" + paramsWeek;
+        console.log(queryURLWeek);
+
+        $.ajax(
+        {
+            url: queryURLWeek,
+            method: "GET"
+        })
+        .then(function(response) 
+        {
+            console.log(response);
+            let forecast = response;
+
+            
+        });
     });
   }
 
