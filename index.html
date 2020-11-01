@@ -65,10 +65,34 @@
 
           <div class="row">
             <div class="card" style="width: 20%">
-              <img src="..." class="card-img-top" alt="...">
+              <img src="..." class="card-img-top" alt="..." id="conditions0">
               <div class="card-body">
                 <h5 class="card-title">Card title</h5>
-                <p class="card-text">Weather</p>
+                <p class="card-text" id="temp-day0">Weather</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item" id="temp-low-day-1">Temp</li>
+                <li class="list-group-item">Wind</li>
+                <li class="list-group-item" id="humidity-day-1">Humidity</li>
+              </ul>
+            </div>
+            <div class="card" style="width: 20%">
+              <img src="..." class="card-img-top" alt="..." id="conditions1">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text" id="temp-day1">Weather</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item" id="temp-day-2">Temp</li>
+                <li class="list-group-item">Wind</li>
+                <li class="list-group-item" id="humidity-day-2">Humidity</li>
+              </ul>
+            </div>
+            <div class="card" style="width: 20%">
+              <img src="..." class="card-img-top" alt="..." id="conditions2">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text" id="temp-day2">Weather</p>
               </div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">Temp</li>
@@ -77,10 +101,10 @@
               </ul>
             </div>
             <div class="card" style="width: 20%">
-              <img src="..." class="card-img-top" alt="...">
+              <img src="..." class="card-img-top" alt="..." id="conditions3">
               <div class="card-body">
                 <h5 class="card-title">Card title</h5>
-                <p class="card-text">Weather</p>
+                <p class="card-text" id="temp-day3">Weather</p>
               </div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">Temp</li>
@@ -89,34 +113,10 @@
               </ul>
             </div>
             <div class="card" style="width: 20%">
-              <img src="..." class="card-img-top" alt="...">
+              <img src="..." class="card-img-top" alt="..." id="conditions4">
               <div class="card-body">
                 <h5 class="card-title">Card title</h5>
-                <p class="card-text">Weather</p>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Temp</li>
-                <li class="list-group-item">Wind</li>
-                <li class="list-group-item">Humidity</li>
-              </ul>
-            </div>
-            <div class="card" style="width: 20%">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Weather</p>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Temp</li>
-                <li class="list-group-item">Wind</li>
-                <li class="list-group-item">Humidity</li>
-              </ul>
-            </div>
-            <div class="card" style="width: 20%">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Weather</p>
+                <p class="card-text" id="temp-day4">Weather</p>
               </div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">Temp</li>
@@ -272,7 +272,12 @@
             console.log(response);
             let forecast = response;
 
-            
+            for (i=0; i<5; i++)
+            {
+              $("#conditions" + i).attr("src", "http://openweathermap.org/img/wn/" + forecast.daily[i].weather[0].icon + "@2x.png")
+              $("#temp-day" + i).text(kelvinToFahrenheit(forecast.daily[i].temp.max) + "/" + kelvinToFahrenheit(forecast.daily[i].temp.min) + '\u00B0' + "F");
+            }
+
         });
     });
   }
