@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <title>Caleb Walker - Home</title>
+    <title>Weather</title>
 </head>
 
 <div id="page-container">
@@ -157,10 +157,18 @@
   {
     let newBtn = $("<button>");
     newBtn.attr("type", "button");
-    newBtn.addClass("list-group-item list-group-item-action");
+    newBtn.addClass("list-group-item list-group-item-action active");
     newBtn.text(location);
     newBtn.attr("data-location", location);
     $("#location-buttons").prepend(newBtn);
+  }
+
+  function resetActiveButton()
+  {
+    $("button").each(function()
+    {
+      $(this).removeClass("active");
+    })
   }
 
   function windDirection(degreesString)
@@ -204,13 +212,8 @@
     return direction;
   }
 
-  $("#location-search").on("submit", function(event)
+  function pullWeatherData(location)
   {
-    event.preventDefault();
-
-    let location = $("#location-input").val();
-    $("#location-input").val("");
-
     let params = 
     {
       q: location,
@@ -231,17 +234,28 @@
     {
         console.log(response);
         let forecast = response;
+        resetActiveButton();
         createLocationButton(forecast.name);
 
         $("#location-name").text(forecast.name);
         $("#current-temp").text("Current: " + kelvinToFahrenheit(forecast.main.temp) + '\u00B0' + "F");
         $("#feels-like").text("Feels like: " + kelvinToFahrenheit(forecast.main.feels_like) + '\u00B0' + "F");
-        $("#temp-high").text("High: " + kelvinToFahrenheit(forecast.main.temp_min) + '\u00B0' + "F");
-        $("#temp-low").text("Low: " + kelvinToFahrenheit(forecast.main.temp_max) + '\u00B0' + "F");
+        $("#temp-high").text("High: " + kelvinToFahrenheit(forecast.main.temp_max) + '\u00B0' + "F");
+        $("#temp-low").text("Low: " + kelvinToFahrenheit(forecast.main.temp_min) + '\u00B0' + "F");
         $("#current-humidity").text("Humidity: " + forecast.main.humidity + "%");
         $("#current-wind").text("Wind: " + forecast.wind.speed + windDirection(forecast.wind.deg));
         $("#weather-condition").attr("src", "http://openweathermap.org/img/wn/" + forecast.weather[0].icon + "@2x.png")
     });
+  }
+
+  $("#location-search").on("submit", function(event)
+  {
+    event.preventDefault();
+
+    let location = $("#location-input").val();
+    $("#location-input").val("");
+
+    pullWeatherData(location);
   })
 
 </script>
