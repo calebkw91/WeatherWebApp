@@ -55,7 +55,7 @@
                     <ul>
                       <li id="current-humidity">Humidity</li>
                       <li id="current-wind">Wind</li>
-                      <!-- <li id="current-precip">Precip</li> -->
+                      <li id="current-uv">UV</li>
                     </ul>
                   </div>
                 </div>
@@ -240,8 +240,8 @@
 
     $.ajax(
     {
-        url: queryURL,
-        method: "GET"
+      url: queryURL,
+      method: "GET"
     })
     .then(function(response) 
     {
@@ -263,7 +263,7 @@
         {
           lat: forecast.coord.lat,
           lon: forecast.coord.lon,
-          exclude: "current,minutely,hourly",
+          exclude: "minutely,hourly",
           appid: "87cd2f3bae194c48a4c4081e9ab09c49"
         }
 
@@ -274,25 +274,26 @@
 
         $.ajax(
         {
-            url: queryURLWeek,
-            method: "GET"
+          url: queryURLWeek,
+          method: "GET"
         })
         .then(function(response) 
         {
-            console.log(response);
-            let forecast = response;
+          console.log(response);
+          let forecast = response;
 
-            $("#temp-high").text("High: " + kelvinToFahrenheit(forecast.daily[0].temp.max) + '\u00B0' + "F");
-            $("#temp-low").text("Low: " + kelvinToFahrenheit(forecast.daily[0].temp.min) + '\u00B0' + "F");
+          $("#temp-high").text("High: " + kelvinToFahrenheit(forecast.daily[0].temp.max) + '\u00B0' + "F");
+          $("#temp-low").text("Low: " + kelvinToFahrenheit(forecast.daily[0].temp.min) + '\u00B0' + "F");
+          $("#current-uv").text("UV Index: " + forecast.current.uvi);
 
-            for (i=0; i<5; i++)
-            {
-              $("#conditions" + i).attr("src", "http://openweathermap.org/img/wn/" + forecast.daily[i].weather[0].icon + "@2x.png")
-              $("#temp-day" + i).text(kelvinToFahrenheit(forecast.daily[i].temp.max) + "/" + kelvinToFahrenheit(forecast.daily[i].temp.min) + '\u00B0' + "F");
-              $("#humidity-day" + i).text("Humidity: " + forecast.daily[i].humidity + "%");
-              $("#wind-day" + i).text("Wind: " + forecast.daily[i].wind_speed + windDirection(forecast.daily[i].wind_deg));
-              $("#precip-day" + i).text("Precip: " + forecast.daily[i].pop + "%");
-            }
+          for (i=0; i<5; i++)
+          {
+            $("#conditions" + i).attr("src", "http://openweathermap.org/img/wn/" + forecast.daily[i].weather[0].icon + "@2x.png")
+            $("#temp-day" + i).text(kelvinToFahrenheit(forecast.daily[i].temp.max) + "/" + kelvinToFahrenheit(forecast.daily[i].temp.min) + '\u00B0' + "F");
+            $("#humidity-day" + i).text("Humidity: " + forecast.daily[i].humidity + "%");
+            $("#wind-day" + i).text("Wind: " + forecast.daily[i].wind_speed + windDirection(forecast.daily[i].wind_deg));
+            $("#precip-day" + i).text("Precip: " + forecast.daily[i].pop + "%");
+          }
         });
     });
   }
@@ -308,10 +309,8 @@
   $("#location-search").on("submit", function(event)
   {
     event.preventDefault();
-
     let location = $("#location-input").val();
     $("#location-input").val("");
-
     pullWeatherData(location, true);
   })
 
