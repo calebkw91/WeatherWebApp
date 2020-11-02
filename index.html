@@ -71,7 +71,7 @@
                 <p class="card-text" id="temp-day0">Weather</p>
               </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item" id="temp-low-day-1">Temp</li>
+                <li class="list-group-item" id="precip-day0">Temp</li>
                 <li class="list-group-item" id="wind-day0">Wind</li>
                 <li class="list-group-item" id="humidity-day0">Humidity</li>
               </ul>
@@ -83,7 +83,7 @@
                 <p class="card-text" id="temp-day1">Weather</p>
               </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item" id="temp-day-2">Temp</li>
+                <li class="list-group-item" id="precip-day1">Temp</li>
                 <li class="list-group-item" id="wind-day1">Wind</li>
                 <li class="list-group-item" id="humidity-day1">Humidity</li>
               </ul>
@@ -95,7 +95,7 @@
                 <p class="card-text" id="temp-day2">Weather</p>
               </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">Temp</li>
+                <li class="list-group-item" id="precip-day2">Temp</li>
                 <li class="list-group-item" id="wind-day2">Wind</li>
                 <li class="list-group-item" id="humidity-day2">Humidity</li>
               </ul>
@@ -107,7 +107,7 @@
                 <p class="card-text" id="temp-day3">Weather</p>
               </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">Temp</li>
+                <li class="list-group-item" id="precip-day3">Temp</li>
                 <li class="list-group-item" id="wind-day3">Wind</li>
                 <li class="list-group-item" id="humidity-day3">Humidity</li>
               </ul>
@@ -119,7 +119,7 @@
                 <p class="card-text" id="temp-day4">Weather</p>
               </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">Temp</li>
+                <li class="list-group-item" id="precip-day4">Temp</li>
                 <li class="list-group-item" id="wind-day4">Wind</li>
                 <li class="list-group-item" id="humidity-day4">Humidity</li>
               </ul>
@@ -243,8 +243,6 @@
         $("#location-name").text(forecast.name);
         $("#current-temp").text("Current: " + kelvinToFahrenheit(forecast.main.temp) + '\u00B0' + "F");
         $("#feels-like").text("Feels like: " + kelvinToFahrenheit(forecast.main.feels_like) + '\u00B0' + "F");
-        $("#temp-high").text("High: " + kelvinToFahrenheit(forecast.main.temp_max) + '\u00B0' + "F");
-        $("#temp-low").text("Low: " + kelvinToFahrenheit(forecast.main.temp_min) + '\u00B0' + "F");
         $("#current-humidity").text("Humidity: " + forecast.main.humidity + "%");
         $("#current-wind").text("Wind: " + forecast.wind.speed + windDirection(forecast.wind.deg));
         $("#weather-condition").attr("src", "http://openweathermap.org/img/wn/" + forecast.weather[0].icon + "@2x.png")
@@ -272,12 +270,16 @@
             console.log(response);
             let forecast = response;
 
+            $("#temp-high").text("High: " + kelvinToFahrenheit(forecast.daily[0].temp.max) + '\u00B0' + "F");
+            $("#temp-low").text("Low: " + kelvinToFahrenheit(forecast.daily[0].temp.min) + '\u00B0' + "F");
+
             for (i=0; i<5; i++)
             {
               $("#conditions" + i).attr("src", "http://openweathermap.org/img/wn/" + forecast.daily[i].weather[0].icon + "@2x.png")
               $("#temp-day" + i).text(kelvinToFahrenheit(forecast.daily[i].temp.max) + "/" + kelvinToFahrenheit(forecast.daily[i].temp.min) + '\u00B0' + "F");
               $("#humidity-day" + i).text("Humidity: " + forecast.daily[i].humidity + "%");
               $("#wind-day" + i).text("Wind: " + forecast.daily[i].wind_speed + windDirection(forecast.daily[i].wind_deg));
+              $("#precip-day" + i).text("Precip: " + forecast.daily[i].pop + "%");
             }
         });
     });
