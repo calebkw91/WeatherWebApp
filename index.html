@@ -247,9 +247,11 @@
     {
         let forecast = response;
 
+        console.log(response);
+
         if (newBtn)
         {
-          createLocationButton(forecast.name);
+          createLocationButton(forecast.name + ", " + forecast.sys.country);
         }
 
         $("#location-name").text(forecast.name);
@@ -279,7 +281,6 @@
         })
         .then(function(response) 
         {
-          console.log(response);
           let forecast = response;
 
           $("#temp-high").text("High: " + kelvinToFahrenheit(forecast.daily[0].temp.max) + '\u00B0' + "F");
