@@ -16,22 +16,22 @@
 
 <div id="page-container">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Weather</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="navbar-nav mr-auto"></div>
-        <form class="form-inline my-2 my-lg-0" id="location-search">
-          <input class="form-control mr-sm-2" id="location-input" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
+    <h2>Weather Search</h2>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="navbar-nav mr-auto"></div>
+      <form class="form-inline my-2 my-sm-0" id="location-search">
+        <input class="form-control mr-sm-2" id="location-input" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
   </nav>
 
   <main id="main">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-9">
 
@@ -40,18 +40,18 @@
               <h5 class="card-header" id="location-name">Location</h5>
               <div class="card-body">
                 <div class="row">
-                  <div class="col-4">
+                  <div class="col-md-4">
                     <h5 class="card-title" id="current-temp">Current Temp</h5>
                     <img src="" id="weather-condition" alt="weather condition">
                   </div>
-                  <div class="col-4">
+                  <div class="col-md-4">
                     <ul>
                       <li id="feels-like">Feels Like</li>
                       <li id="temp-high">High</li>
                       <li id="temp-low">Low</li>
                     </ul>
                   </div>
-                  <div class="col-4">
+                  <div class="col-md-4">
                     <ul>
                       <li id="current-humidity">Humidity</li>
                       <li id="current-wind">Wind</li>
@@ -64,9 +64,9 @@
           </div>
 
           <div class="row">
-            <div class="card" style="width: 20%">
+            <div class="card col-lg-2">
               <h5 class="card-title" id="day0" style="text-align: center;">Card title</h5>
-              <img src="..." class="card-img-top" alt="..." id="conditions0">
+              <img src="..." class="card-img-top" alt="..." id="conditions0" style="max-width: 110px;">
               <div class="card-body">
                 <p class="card-text" id="temp-day0">Weather</p>
               </div>
@@ -76,9 +76,9 @@
                 <li class="list-group-item" id="humidity-day0">Humidity</li>
               </ul>
             </div>
-            <div class="card" style="width: 20%">
+            <div class="card col-lg-2">
               <h5 class="card-title" id="day1" style="text-align: center;">Card title</h5>
-              <img src="..." class="card-img-top" alt="..." id="conditions1">
+              <img src="..." class="card-img-top" alt="..." id="conditions1" style="max-width: 110px;">
               <div class="card-body">
                 <p class="card-text" id="temp-day1">Weather</p>
               </div>
@@ -88,9 +88,9 @@
                 <li class="list-group-item" id="humidity-day1">Humidity</li>
               </ul>
             </div>
-            <div class="card" style="width: 20%">
+            <div class="card col-lg-2">
               <h5 class="card-title" id="day2" style="text-align: center;">Card title</h5>
-              <img src="..." class="card-img-top" alt="..." id="conditions2">
+              <img src="..." class="card-img-top" alt="..." id="conditions2" style="max-width: 110px;">
               <div class="card-body">
                 <p class="card-text" id="temp-day2">Weather</p>
               </div>
@@ -100,9 +100,9 @@
                 <li class="list-group-item" id="humidity-day2">Humidity</li>
               </ul>
             </div>
-            <div class="card" style="width: 20%">
+            <div class="card col-lg-2">
               <h5 class="card-title" id="day3" style="text-align: center;">Card title</h5>
-              <img src="..." class="card-img-top" alt="..." id="conditions3">
+              <img src="..." class="card-img-top" alt="..." id="conditions3" style="max-width: 110px;">
               <div class="card-body">
                 <p class="card-text" id="temp-day3">Weather</p>
               </div>
@@ -112,9 +112,9 @@
                 <li class="list-group-item" id="humidity-day3">Humidity</li>
               </ul>
             </div>
-            <div class="card" style="width: 20%">
+            <div class="card col-lg-2">
               <h5 class="card-title" id="day4" style="text-align: center;">Card title</h5>
-              <img src="..." class="card-img-top" alt="..." id="conditions4">
+              <img src="..." class="card-img-top" alt="..." id="conditions4" style="max-width: 110px;">
               <div class="card-body">
                 <p class="card-text" id="temp-day4">Weather</p>
               </div>
@@ -122,6 +122,18 @@
                 <li class="list-group-item" id="precip-day4">Temp</li>
                 <li class="list-group-item" id="wind-day4">Wind</li>
                 <li class="list-group-item" id="humidity-day4">Humidity</li>
+              </ul>
+            </div>
+            <div class="card col-lg-2">
+              <h5 class="card-title" id="day5" style="text-align: center;">Card title</h5>
+              <img src="..." class="card-img-top" alt="..." id="conditions5" style="max-width: 110px;">
+              <div class="card-body">
+                <p class="card-text" id="temp-day5">Weather</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item" id="precip-day5">Temp</li>
+                <li class="list-group-item" id="wind-day5">Wind</li>
+                <li class="list-group-item" id="humidity-day5">Humidity</li>
               </ul>
             </div>
           </div>
@@ -148,10 +160,10 @@
 
   setDayTitle();
 
-  function kelvinToFahrenheit(temp)
+  function kelvinToFahrenheit(temp, decimal)
   {
     let tempInt = parseInt(temp);
-    let fTemp = ((tempInt - 273.15)*9/5 + 32).toFixed(1);
+    let fTemp = ((tempInt - 273.15)*9/5 + 32).toFixed(decimal);
   
     return fTemp;
   }
@@ -182,6 +194,7 @@
     $("#day2").text(moment().add(2, 'd').format("dddd"));
     $("#day3").text(moment().add(3, 'd').format("dddd"));
     $("#day4").text(moment().add(4, 'd').format("dddd"));
+    $("#day5").text(moment().add(5, 'd').format("dddd"));
   }
 
   function windDirection(degreesString)
@@ -247,18 +260,16 @@
     {
         let forecast = response;
 
-        console.log(response);
-
         if (newBtn)
         {
           createLocationButton(forecast.name + ", " + forecast.sys.country);
         }
 
         $("#location-name").text(forecast.name);
-        $("#current-temp").text("Current: " + kelvinToFahrenheit(forecast.main.temp) + '\u00B0' + "F");
-        $("#feels-like").text("Feels like: " + kelvinToFahrenheit(forecast.main.feels_like) + '\u00B0' + "F");
+        $("#current-temp").text("Current: " + kelvinToFahrenheit(forecast.main.temp, 1) + '\u00B0' + "F");
+        $("#feels-like").text("Feels like: " + kelvinToFahrenheit(forecast.main.feels_like, 1) + '\u00B0' + "F");
         $("#current-humidity").text("Humidity: " + forecast.main.humidity + "%");
-        $("#current-wind").text("Wind: " + forecast.wind.speed + windDirection(forecast.wind.deg));
+        $("#current-wind").text("Wind: " + forecast.wind.speed.toFixed(0) + windDirection(forecast.wind.deg));
         $("#weather-condition").attr("src", "http://openweathermap.org/img/wn/" + forecast.weather[0].icon + "@2x.png")
 
         let paramsWeek = 
@@ -283,16 +294,16 @@
         {
           let forecast = response;
 
-          $("#temp-high").text("High: " + kelvinToFahrenheit(forecast.daily[0].temp.max) + '\u00B0' + "F");
-          $("#temp-low").text("Low: " + kelvinToFahrenheit(forecast.daily[0].temp.min) + '\u00B0' + "F");
+          $("#temp-high").text("High: " + kelvinToFahrenheit(forecast.daily[0].temp.max, 0) + '\u00B0' + "F");
+          $("#temp-low").text("Low: " + kelvinToFahrenheit(forecast.daily[0].temp.min, 0) + '\u00B0' + "F");
           $("#current-uv").text("UV Index: " + forecast.current.uvi);
 
-          for (i=0; i<5; i++)
+          for (i=0; i<6; i++)
           {
             $("#conditions" + i).attr("src", "http://openweathermap.org/img/wn/" + forecast.daily[i].weather[0].icon + "@2x.png")
-            $("#temp-day" + i).text(kelvinToFahrenheit(forecast.daily[i].temp.max) + "/" + kelvinToFahrenheit(forecast.daily[i].temp.min) + '\u00B0' + "F");
+            $("#temp-day" + i).text(kelvinToFahrenheit(forecast.daily[i].temp.max, 0) + "/" + kelvinToFahrenheit(forecast.daily[i].temp.min, 0) + '\u00B0' + "F");
             $("#humidity-day" + i).text("Humidity: " + forecast.daily[i].humidity + "%");
-            $("#wind-day" + i).text("Wind: " + forecast.daily[i].wind_speed + windDirection(forecast.daily[i].wind_deg));
+            $("#wind-day" + i).text("Wind: " + forecast.daily[i].wind_speed.toFixed(0) + windDirection(forecast.daily[i].wind_deg));
             $("#precip-day" + i).text("Precip: " + forecast.daily[i].pop + "%");
           }
         });
