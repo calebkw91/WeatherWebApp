@@ -8,7 +8,7 @@ header,
 footer,
 nav 
 {
-    background-color: #4341b2;
+    background-color: #6092c3;
     color: white;
 }
 
@@ -21,6 +21,12 @@ body
     background-color: whitesmoke;
 }
 
+.btn-outline-success
+{
+    color: white;
+    border-color: white;
+}
+
 .card-title
 {
     margin-top: 10px;
@@ -28,13 +34,13 @@ body
 
 .list-group-item.active
 {
-    background-color: #4341b2;
-    border-color: #4341b2;
+    background-color: #6092c3;
+    border-color: #6092c3;
 }
 
 .card-header
 {
-    background-color: #4341b2;
+    background-color: #6092c3;
     color: white;
 }
 
