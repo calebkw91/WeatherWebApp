@@ -1,8 +1,10 @@
 $(document).ready(function()
 {
+    //Pulls weather data from default location to populate page
     pullWeatherData("Minneapolis", false);
     setDayTitle();
 
+    //Converts kevlin to fahrenheit and rounds to given decimal place
     function kelvinToFahrenheit(temp, decimal)
     {
         let tempInt = parseInt(temp);
@@ -11,6 +13,7 @@ $(document).ready(function()
         return fTemp;
     }
 
+    //Creates a new location shortcut if the shortcut has not already been created, sets shortcut to appear as active color
     function createLocationButton(location)
     {
         let existingButton = false;
@@ -36,6 +39,7 @@ $(document).ready(function()
         }
     }
 
+    //Clears active class from location shortcut buttons to avoid multiple buttons showing as active
     function resetActiveButton()
     {
         $("button").each(function()
@@ -44,6 +48,7 @@ $(document).ready(function()
         })
     }
 
+    //Gets day from moment.js and adds to it to fill out the week
     function setDayTitle()
     {
         $("#day0").text(moment().format("dddd"));
@@ -54,6 +59,7 @@ $(document).ready(function()
         $("#day5").text(moment().add(5, 'd').format("dddd"));
     }
 
+    //Gets cardinal direction from wind degrees
     function windDirection(degreesString)
     {
         let direction = "";
@@ -95,6 +101,9 @@ $(document).ready(function()
         return direction;
     }
 
+    //Pulls weather data from openweather api, uses current weather api for some info, then passes latitude and longitude
+    //into one call api for rest of information
+    //Calls button create function if necesarry
     function pullWeatherData(location, newBtn)
     {
         let params = 
@@ -167,6 +176,7 @@ $(document).ready(function()
         });
     }
 
+    //Quick searches existing locations when shortcut button is clicked
     $(document).on("click", ".location-button", function()
     {
         let location = $(this).attr("data-location");
@@ -175,6 +185,7 @@ $(document).ready(function()
         pullWeatherData(location, false);
     })
 
+    //Event for search button, sends data to api for weather information and creates new shortcut button
     $("#location-search").on("submit", function(event)
     {
         event.preventDefault();
