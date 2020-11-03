@@ -179,13 +179,27 @@
 
   function createLocationButton(location)
   {
+    let existingButton = false;
     resetActiveButton();
-    let newBtn = $("<button>");
-    newBtn.attr("type", "button");
-    newBtn.addClass("list-group-item list-group-item-action location-button active");
-    newBtn.text(location);
-    newBtn.attr("data-location", location);
-    $("#location-buttons").prepend(newBtn);
+
+    $("button").each(function()
+    {
+      if ($(this).attr("data-location") === location)
+      {
+        $(this).addClass("active");
+        existingButton = true;
+      }
+    })
+
+    if (!existingButton)
+    {
+      let newBtn = $("<button>");
+      newBtn.attr("type", "button");
+      newBtn.addClass("list-group-item list-group-item-action location-button active");
+      newBtn.text(location);
+      newBtn.attr("data-location", location);
+      $("#location-buttons").prepend(newBtn);
+    }
   }
 
   function resetActiveButton()
