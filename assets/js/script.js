@@ -1,8 +1,25 @@
 $(document).ready(function()
 {
     //Pulls weather data from default location to populate page
-    pullWeatherData("Minneapolis", false);
+    
+    getLastLoaded();
     setDayTitle();
+    searchHistoryLoad();
+
+    //Pulls last loaded location on initial page visit
+    function getLastLoaded()
+    {
+        resetActiveButton();
+
+        if(localStorage.getItem("lastLoaded") == null)
+        {
+            pullWeatherData("Minneapolis", false);
+        }
+        else
+        {
+            pullWeatherData(localStorage.getItem("lastLoaded"), true);
+        }
+    }
 
     //Converts kevlin to fahrenheit and rounds to given decimal place
     function kelvinToFahrenheit(temp, decimal)
@@ -21,22 +38,53 @@ $(document).ready(function()
 
         $("button").each(function()
         {
-        if ($(this).attr("data-location") === location)
-        {
-            $(this).addClass("active");
-            existingButton = true;
-        }
+            if ($(this).attr("data-location") === location)
+            {
+                $(this).addClass("active");
+                existingButton = true;
+            }
         })
 
         if (!existingButton)
         {
-        let newBtn = $("<button>");
-        newBtn.attr("type", "button");
-        newBtn.addClass("list-group-item list-group-item-action location-button active");
-        newBtn.text(location);
-        newBtn.attr("data-location", location);
-        $("#location-buttons").prepend(newBtn);
+            addToSearchHistory(location);
+            let newBtn = $("<button>");
+            newBtn.attr("type", "button");
+            newBtn.addClass("list-group-item list-group-item-action location-button active");
+            newBtn.text(location);
+            newBtn.attr("data-location", location);
+            $("#location-buttons").prepend(newBtn);
         }
+    }
+
+    //Loads search history form local storage
+    function searchHistoryLoad()
+    {
+        let searchHistory = [];
+
+        if (localStorage.getItem("history") != null)
+        {
+            searchHistory = JSON.parse(localStorage.getItem("history"));
+        }
+
+        for (let i=0; i<searchHistory.length; i++)
+        {
+            createLocationButton(searchHistory[i]);
+        }
+    }
+
+    //Saves search history in local storage
+    function addToSearchHistory(location)
+    {
+        let searchHistory = [];
+
+        if (localStorage.getItem("history") != null)
+        {
+            searchHistory = searchHistory.concat(JSON.parse(localStorage.getItem("history")));
+        }
+
+        searchHistory = searchHistory.concat(location);
+        localStorage.setItem("history", JSON.stringify(searchHistory));
     }
 
     //Clears active class from location shortcut buttons to avoid multiple buttons showing as active
@@ -57,6 +105,30 @@ $(document).ready(function()
         $("#day3").text(moment().add(3, 'd').format("dddd"));
         $("#day4").text(moment().add(4, 'd').format("dddd"));
         $("#day5").text(moment().add(5, 'd').format("dddd"));
+    }
+
+    function setuvIndexBadgeColor(uvIndex)
+    {
+        uvIndex = parseInt(uvIndex);
+
+        if (uvIndex <= 4)
+        {
+            $("#current-uv").removeClass("badge-warning");
+            $("#current-uv").removeClass("badge-danger");
+            $("#current-uv").addClass("badge-success");
+        }
+        if (uvIndex > 4 && uvIndex <= 6)
+        {
+            $("#current-uv").addClass("badge-warning");
+            $("#current-uv").removeClass("badge-danger");
+            $("#current-uv").removeClass("badge-success");
+        }
+        if (uvIndex > 6)
+        {
+            $("#current-uv").removeClass("badge-warning");
+            $("#current-uv").addClass("badge-danger");
+            $("#current-uv").removeClass("badge-success");
+        }
     }
 
     //Gets cardinal direction from wind degrees
@@ -106,6 +178,8 @@ $(document).ready(function()
     //Calls button create function if necesarry
     function pullWeatherData(location, newBtn)
     {
+        localStorage.setItem("lastLoaded", location);
+
         let params = 
         {
         q: location,
@@ -163,6 +237,7 @@ $(document).ready(function()
             $("#temp-high").text("High: " + kelvinToFahrenheit(forecast.daily[0].temp.max, 0) + '\u00B0' + "F");
             $("#temp-low").text("Low: " + kelvinToFahrenheit(forecast.daily[0].temp.min, 0) + '\u00B0' + "F");
             $("#current-uv").text("UV Index: " + forecast.current.uvi);
+            setuvIndexBadgeColor(forecast.current.uvi);
 
             for (i=0; i<6; i++)
             {
